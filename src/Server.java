@@ -92,7 +92,7 @@ public class Server
 				if (s.equalsIgnoreCase("/killServer"))
 				{
 					//					fileOut = new PrintWriter("recieved.txt");
-					fileOut.append(LocalDateTime.now());
+					fileOut.append(""+LocalDateTime.now()+"		");
 					fileOut.append(s + System.lineSeparator());
 					
 					break;
@@ -106,7 +106,7 @@ public class Server
 				//				}
 
 				//				fileOut = new PrintWriter("recieved.txt");
-				fileOut.append(LocalDateTime.now());
+				fileOut.append(""+LocalDateTime.now()+"		");
 				fileOut.append(s + System.lineSeparator());
 				fileOut.flush();
 				//				fileOut.close();
