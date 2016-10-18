@@ -88,29 +88,31 @@ public class Server
 					{
 						fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
 					}
-				}
-
-				if (s.equalsIgnoreCase("/killServer"))
+				}else 
 				{
+	
+					if (s.equalsIgnoreCase("/killServer"))
+					{
+						//					fileOut = new PrintWriter("recieved.txt");
+						fileOut.append(""+LocalDateTime.now()+"		");
+						fileOut.append("       "+s + System.lineSeparator());
+						
+						break;
+					}//else if (s.equalsIgnoreCase("/eraseServer"))
+					//				{
 					//					fileOut = new PrintWriter("recieved.txt");
+					//					fileOut.append(s + System.lineSeparator());
+					//					fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
+					//					fileOut.flush();
+					//					fileOut.close();
+					//				}
+	
+					//				fileOut = new PrintWriter("recieved.txt");
 					fileOut.append(""+LocalDateTime.now()+"		");
 					fileOut.append("       "+s + System.lineSeparator());
-					
-					break;
-				}//else if (s.equalsIgnoreCase("/eraseServer"))
-				//				{
-				//					fileOut = new PrintWriter("recieved.txt");
-				//					fileOut.append(s + System.lineSeparator());
-				//					fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
-				//					fileOut.flush();
-				//					fileOut.close();
-				//				}
-
-				//				fileOut = new PrintWriter("recieved.txt");
-				fileOut.append(""+LocalDateTime.now()+"		");
-				fileOut.append("       "+s + System.lineSeparator());
-				fileOut.flush();
-				//				fileOut.close();
+					fileOut.flush();
+					//				fileOut.close();
+				}
 			}
 			fileOut.flush();
 			fileOut.close();
