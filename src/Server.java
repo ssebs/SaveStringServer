@@ -92,10 +92,11 @@ public class Server
 				if (s.equalsIgnoreCase("/killServer"))
 				{
 					//					fileOut = new PrintWriter("recieved.txt");
+					fileOut.append(LocalDateTime.now());
 					fileOut.append(s + System.lineSeparator());
-					fileOut.append(LocalDateTime.now() + System.lineSeparator());
+					
 					break;
-				} //else if (s.equalsIgnoreCase("/eraseServer"))
+				}//else if (s.equalsIgnoreCase("/eraseServer"))
 				//				{
 				//					fileOut = new PrintWriter("recieved.txt");
 				//					fileOut.append(s + System.lineSeparator());
@@ -105,8 +106,8 @@ public class Server
 				//				}
 
 				//				fileOut = new PrintWriter("recieved.txt");
+				fileOut.append(LocalDateTime.now());
 				fileOut.append(s + System.lineSeparator());
-				fileOut.append(LocalDateTime.now() + System.lineSeparator());
 				fileOut.flush();
 				//				fileOut.close();
 			}
