@@ -71,7 +71,7 @@ public class Server
 				if (s.startsWith("mobile|"))
 				{
 					fileOut.append(""+LocalDateTime.now()+"		");
-					fileOut.append(s.substring(7) + System.lineSeparator());
+					fileOut.append(s + System.lineSeparator());
 					fileOut.flush();
 					
 					String sendBack = "Your message was sent successfully from Server: " + InetAddress.getLocalHost();
@@ -94,7 +94,7 @@ public class Server
 				{
 					//					fileOut = new PrintWriter("recieved.txt");
 					fileOut.append(""+LocalDateTime.now()+"		");
-					fileOut.append(s + System.lineSeparator());
+					fileOut.append("       "+s + System.lineSeparator());
 					
 					break;
 				}//else if (s.equalsIgnoreCase("/eraseServer"))
@@ -108,7 +108,7 @@ public class Server
 
 				//				fileOut = new PrintWriter("recieved.txt");
 				fileOut.append(""+LocalDateTime.now()+"		");
-				fileOut.append(s + System.lineSeparator());
+				fileOut.append("       "+s + System.lineSeparator());
 				fileOut.flush();
 				//				fileOut.close();
 			}
