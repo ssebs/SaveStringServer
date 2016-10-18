@@ -68,26 +68,27 @@ public class Server
 
 				//echo("after recieve");
 
-				//				if (s.startsWith("mobile|"))
-				//				{
-				//					fileOut = new PrintWriter("recieved.txt");
-				//					fileOut.append(s + System.lineSeparator());
-				//					
-				//					String sendBack = "Your message was sent successfully from Server: " + InetAddress.getLocalHost();
-				//					DatagramPacket dp = new DatagramPacket(sendBack.getBytes(), sendBack.getBytes().length,
-				//							incoming.getAddress(), incoming.getPort());
-				//
-				//					sock.send(dp);
-				//					
-				//					if (s.toLowerCase().contains("/killserver"))
-				//					{
-				//						fileOut.append(LocalDateTime.now() + System.lineSeparator());
-				//						break;
-				//					} else if (s.toLowerCase().contains("/eraseserver"))
-				//					{
-				//						fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
-				//					}
-				//				}else { } 
+				if (s.startsWith("mobile|"))
+				{
+					fileOut.append(""+LocalDateTime.now()+"		");
+					fileOut.append(s.substring(7) + System.lineSeparator());
+					fileOut.flush();
+					
+					String sendBack = "Your message was sent successfully from Server: " + InetAddress.getLocalHost();
+					DatagramPacket dp = new DatagramPacket(sendBack.getBytes(), sendBack.getBytes().length,
+							incoming.getAddress(), incoming.getPort());
+
+					sock.send(dp);
+					
+					if (s.toLowerCase().contains("/killserver"))
+					{
+						fileOut.append(LocalDateTime.now() + System.lineSeparator());
+						break;
+					} else if (s.toLowerCase().contains("/eraseserver"))
+					{
+						fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
+					}
+				}
 
 				if (s.equalsIgnoreCase("/killServer"))
 				{
