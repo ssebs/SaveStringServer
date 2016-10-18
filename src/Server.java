@@ -74,7 +74,7 @@ public class Server
 					fileOut.append(s + System.lineSeparator());
 					fileOut.flush();
 					
-					String sendBack = "Your message was sent successfully from Server: " + InetAddress.getLocalHost();
+					String sendBack = "Your message was sent successfully to Server: " + InetAddress.getLocalHost();
 					DatagramPacket dp = new DatagramPacket(sendBack.getBytes(), sendBack.getBytes().length,
 							incoming.getAddress(), incoming.getPort());
 
