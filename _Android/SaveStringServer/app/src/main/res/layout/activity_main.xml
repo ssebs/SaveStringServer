@@ -12,51 +12,43 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/server_ip"
         android:id="@+id/txtServerIP"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/server_ip"
-        android:layout_below="@+id/txtServerIP"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true"
+        android:singleLine="false"
+        android:autoText="false"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/text_to_send_to_server"
         android:id="@+id/main_heading"
-        android:layout_below="@+id/server_ip"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/txtToSend"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/txtServerIP"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="49dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"
         android:id="@+id/btn_submit"
-        android:layout_marginBottom="33dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="submit" />
+        android:onClick="submit"
+        android:layout_below="@+id/txtToSend"
+        android:layout_centerHorizontal="true"/>
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtToSend"
+        android:hint="Message here"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
 
 
 </RelativeLayout>
