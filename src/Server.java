@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.DatagramPacket;
@@ -11,11 +9,14 @@ import java.time.LocalDateTime;
 
 public class Server
 {
-	static PrintWriter fileOut;
+	private static PrintWriter fileOut;
+	
+	//TODO: Make literals in to variables.
 
 	public static void main(String args[])
 	{
 		DatagramSocket sock = null;
+		
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 			public void run()
@@ -23,100 +24,92 @@ public class Server
 				try
 				{
 					Thread.sleep(200);
-					System.out.println("Shouting down ...");
-					//some cleaning up code...
+					System.out.println("Shutting down ...");
 					fileOut.flush();
 					fileOut.close();
 					echo("Server Closed.");
 				} catch (InterruptedException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 		try
 		{
-			//1. creating a server socket, parameter is local port number
+			//Creating a server socket, parameter is local port number
 			sock = new DatagramSocket(7777);
 			//buffer to receive incoming data
 			byte[] buffer = new byte[65536];
 			DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
 
-			//2. Wait for an incoming data
+			//Wait for an incoming data
 			echo("Server socket created. Waiting for incoming data...");
 
+			//Making a PrintWriter to log the data that comes in. true refers to append mode. 
 			fileOut = new PrintWriter(new FileOutputStream(new File("recieved.txt")), true);
 
 			if (!new File("received.txt").isFile())
 			{
-				// Check if output file exists
+				// Check if output file exists, if not it will create this.
 				fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
 				fileOut.flush();
-//				fileOut.close();
 			}
 
-//			fileOut = new PrintWriter(new FileOutputStream(new File("recieved.txt")), true);
-
-			//communication loop
+			//communication loop. Loop can be broken using <CTRL> + <C>, or from a client entering "/killserver"
 			while (true)
 			{
+				// Will wait for the UDP socket to get a signal, then receive the data.
+				// Hopefully they don't happen at same time? Make sync
 				sock.receive(incoming);
 				byte[] data = incoming.getData();
+				
+				// Save data as String.
+				// TODO: Make this not make a String every time.
 				String s = new String(data, 0, incoming.getLength());
+				
 				echo(s);
-
-				//echo("after recieve");
 
 				if (s.startsWith("mobile|"))
 				{
-					fileOut.append(""+LocalDateTime.now()+"		");
+					fileOut.append("" + LocalDateTime.now() + "		");
 					fileOut.append(s + System.lineSeparator());
 					fileOut.flush();
-					
+
 					String sendBack = "Your message was sent successfully to Server: " + InetAddress.getLocalHost();
 					DatagramPacket dp = new DatagramPacket(sendBack.getBytes(), sendBack.getBytes().length,
 							incoming.getAddress(), incoming.getPort());
 
 					sock.send(dp);
-					
+
 					if (s.toLowerCase().contains("/killserver"))
 					{
 						fileOut.append(LocalDateTime.now() + System.lineSeparator());
 						break;
 					} else if (s.toLowerCase().contains("/eraseserver"))
 					{
+						//TODO: Fix this, as of now it only appends. 
 						fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
 					}
-				}else 
+				} else
 				{
-	
+
 					if (s.equalsIgnoreCase("/killServer"))
 					{
-						//					fileOut = new PrintWriter("recieved.txt");
-						fileOut.append(""+LocalDateTime.now()+"		");
-						fileOut.append("       "+s + System.lineSeparator());
-						
+						// Arbitrary spaces are for formatting, they match the mobile version.
+						fileOut.append("" + LocalDateTime.now() + "		");
+						fileOut.append("       " + s + System.lineSeparator());
 						break;
-					}//else if (s.equalsIgnoreCase("/eraseServer"))
-					//				{
-					//					fileOut = new PrintWriter("recieved.txt");
-					//					fileOut.append(s + System.lineSeparator());
-					//					fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
-					//					fileOut.flush();
-					//					fileOut.close();
-					//				}
-	
-					//				fileOut = new PrintWriter("recieved.txt");
-					fileOut.append(""+LocalDateTime.now()+"		");
-					fileOut.append("       "+s + System.lineSeparator());
+					} else if (s.toLowerCase().contains("/eraseserver"))
+					{
+						//TODO: Fix this, as of now it only appends. 
+						fileOut.println("RECEIVED DATA" + System.lineSeparator() + "==============");
+					}
+					// Arbitrary spaces are for formatting, they match the mobile version.
+					fileOut.append("" + LocalDateTime.now() + "		");
+					fileOut.append("       " + s + System.lineSeparator());
 					fileOut.flush();
-					//				fileOut.close();
 				}
-			}
-			fileOut.flush();
-			fileOut.close();
-			echo("Server Closed.");
+			} // End communication loop
 		}
 
 		catch (IOException e)
@@ -126,24 +119,9 @@ public class Server
 
 	}
 
-	//simple function to echo data to terminal
+	// Shorter version of Java's Println.
 	public static void echo(String msg)
 	{
 		System.out.println(msg);
 	}
-
-	private static String readFile(String path) throws IOException
-	{
-		String ret = "";
-		try (BufferedReader br = new BufferedReader(new FileReader(path)))
-		{
-			String line = null;
-			while ((line = br.readLine()) != null)
-			{
-				ret += line + System.lineSeparator();
-			}
-		}
-		return ret;
-	}
-
 }
