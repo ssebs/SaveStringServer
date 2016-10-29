@@ -4,4 +4,5 @@
     <string name="enter_ip_here">Enter ip here</string>
     <string name="text_to_send_to_server">Text to send to server</string>
     <string name="submit">Submit</string>
+    <string name="go_to_website">Go to website</string>
 </resources>

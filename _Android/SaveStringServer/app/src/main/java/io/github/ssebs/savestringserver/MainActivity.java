@@ -1,5 +1,6 @@
 package io.github.ssebs.savestringserver;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 	String textToSend;
 	String replyData;
 
+	final String URL = "http://ssebs.ddns.net";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
 
 		EditText et = ((EditText) findViewById(R.id.txtToSend));
 
@@ -72,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 
+	public void linkToSite(View v)
+	{
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
+		startActivity(browserIntent);
+	}
+
 	protected void submit(View v) {
 //		serverIP = ((EditText) findViewById(R.id.ser)).getText().toString();
 		textToSend = ((EditText) findViewById(R.id.txtToSend)).getText().toString();
@@ -84,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 //					else
 //						//host = InetAddress.getByName(serverIP);
 
-					host = InetAddress.getByName("ssebs.ddns.net");
+					host = InetAddress.getByName(URL);
 
 					sock = new DatagramSocket();
 

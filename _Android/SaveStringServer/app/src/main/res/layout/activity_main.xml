@@ -50,5 +50,15 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_website"
+        android:id="@+id/btnWebsiteLink"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="linkToSite"
+        android:nestedScrollingEnabled="false"/>
+
 
 </RelativeLayout>
