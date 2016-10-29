@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SaveStringServer</string>
+    <string name="app_name">ssebs Text Server</string>
     <string name="server_ip">You will send data to: \nssebs.ddns.net on port: 7777</string>
     <string name="enter_ip_here">Enter ip here</string>
     <string name="text_to_send_to_server">Text to send to server</string>

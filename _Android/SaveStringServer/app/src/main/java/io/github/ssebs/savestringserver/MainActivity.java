@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 	String textToSend;
 	String replyData;
 
-	final String URL = "http://ssebs.ddns.net";
+	final String URL = "ssebs.ddns.net";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public void linkToSite(View v)
 	{
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+URL));
 		startActivity(browserIntent);
 	}
 
